@@ -1,16 +1,39 @@
+import { RequestOptionsService } from './services/request-options.service';
+import { DataService } from './services/data.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpModule, RequestOptions } from '@angular/http';
+import {RouterModule} from '@angular/router';
+
 
 import { AppComponent } from './app.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import {ArticlesComponent} from './articles/articles.component';
+import { NewsContentComponent } from './news-content/news-content.component';
+import { ArticleDetailComponent } from './article-detail/article-detail.component';
+import { PicNewsComponent } from './pic-news/pic-news.component'
+
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent,
+  ArticlesComponent,
+  NewsContentComponent,
+  ArticleDetailComponent,
+  PicNewsComponent
+
+
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpModule
+
   ],
-  providers: [],
+  providers: [
+    DataService,
+    { provide: RequestOptions, useClass: RequestOptionsService }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

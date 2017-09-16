@@ -1,0 +1,8 @@
+<div class="thumbnail" *ngFor="let news of allNews">
+  <img [src]="news.urlToImage" alt="Sports News" />
+  <div class="caption post-content">
+    <a [href]="news.url">
+        <h3>{{news.title}}</h3>
+    </a>
+  </div>
+</div>

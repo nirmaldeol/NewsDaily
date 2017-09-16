@@ -1,0 +1,13 @@
+<div *ngIf="articles">
+  <div class="media" *ngFor="let article of articles" (click) ="select(article)">
+    <div class="media-left media-top ">
+      <a>
+          <img class="media-object img-thumbnail" [src]="article.urlToImage" alt="..." width="94" height="100">
+        </a>
+    </div>
+    <div class="media-body ">
+      <h4 class="media-heading">{{article.title}}</h4>
+    </div>
+  </div>
+
+</div>
