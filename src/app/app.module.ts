@@ -11,23 +11,33 @@ import { NavbarComponent } from './navbar/navbar.component';
 import {ArticlesComponent} from './articles/articles.component';
 import { NewsContentComponent } from './news-content/news-content.component';
 import { ArticleDetailComponent } from './article-detail/article-detail.component';
-import { PicNewsComponent } from './pic-news/pic-news.component'
+import { PicNewsComponent } from './pic-news/pic-news.component';
+
 
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NavbarComponent,
+  AppComponent,
+  NavbarComponent,
   ArticlesComponent,
   NewsContentComponent,
   ArticleDetailComponent,
-  PicNewsComponent
+  PicNewsComponent,
+
 
 
   ],
   imports: [
     BrowserModule,
-    HttpModule
+    HttpModule,
+    RouterModule.forRoot([
+      {path:'',component:NewsContentComponent},
+      {path:':id',component:NewsContentComponent},
+      {path:':id/:category',component:NewsContentComponent}
+      
+      
+      
+    ])
 
   ],
   providers: [

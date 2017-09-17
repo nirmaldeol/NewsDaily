@@ -1,5 +1,7 @@
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import 'rxjs/add/operator/take';
 
 @Component({
   selector: 'news-content',
@@ -13,22 +15,35 @@ export class NewsContentComponent implements OnInit {
   sportsNews;
   bussinesNews;
   selectedNews;
+  country;
 
-  constructor(private service: DataService) {
-
+  constructor(private service: DataService, private route: ActivatedRoute) {
+    this.route.paramMap.subscribe(params => {
+      if (params) {
+        console.log(params);
+        this.country = params.get('id');
+      } else {
+        this.country = "au";
+      }
+      console.log(this.country);
+      this.service.getSource(this.country,"general").subscribe(res=>{
+        console.log(res);
+      })
+    });
   }
 
   ngOnInit() {
+
     this.getGeneralNews();
     this.getSportsNews();
     this.getBussinesNews();
 
 
   }
- 
-  selectedArticle(data){
-  this.selectedNews = data.newValue;
-} 
+
+  selectedArticle(data) {
+    this.selectedNews = data.newValue;
+  }
   getGeneralNews(): void {
     this.service.getAll("abc-news-au", "top").subscribe(res => {
       let results = res.json().articles;
