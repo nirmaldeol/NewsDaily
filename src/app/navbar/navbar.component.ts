@@ -1,3 +1,4 @@
+import { StorageService } from './../services/storage.service';
 import { Http } from '@angular/http';
 import { Component, OnInit } from '@angular/core';
 
@@ -10,29 +11,34 @@ export class NavbarComponent implements OnInit {
 
   countryName:string;
   countryId:string;
-   constructor(private http:Http) {
+   constructor(private http:Http , private storage:StorageService) {
+    
+    let name = this.storage.getCountry().name;
+    let id =  this.storage.getCountry().id;
 
-    this.countryName ='Australia';
-    this.countryId='au';
+    this.countryName = name?  name:"Australia";
+    this.countryId = id?  id:"au";
+    
      }
      
    allCountries = [
      {id:"au",name:"Australia"}, 
      {id:"in",name:"India"}, 
      {id:"uk",name:"UK"}, 
-     {id:"usa",name:"USA"}  
+     {id:"us",name:"USA"}  
     ];
 
     selectCountry(country){
       this.countryName = country.name;
       this.countryId =  country.id;
+      this.storage.setCountry(country);      
     }
   
   ngOnInit() {
-  console.log(this.allCountries)
-    this.http.get('https://newsapi.org/v1/sources?country=in').subscribe(res=>{
-      console.log(res.json());
-    })
+  // console.log(this.allCountries)
+  //   this.http.get('https://newsapi.org/v1/sources?country=in').subscribe(res=>{
+  //     console.log(res.json());
+  //   })
     
   }
 

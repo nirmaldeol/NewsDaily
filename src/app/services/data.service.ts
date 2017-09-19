@@ -18,7 +18,7 @@ export class DataService {
 
     return this._http.get("https://newsapi.org/v1/articles", requestOptions);
   }
-  getSource(country, category){
+  getSource(category, country?){
     let params = new URLSearchParams();
     params.set("language", 'en');
     params.set("country", country);
