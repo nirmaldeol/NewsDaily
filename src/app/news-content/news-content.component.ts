@@ -19,27 +19,28 @@ export class NewsContentComponent implements OnInit {
   countryId;
   category;
 
-  constructor(private service: DataService, private route: ActivatedRoute, private storage:StorageService) {
-  
-   this.countryId= this.storage.getCountry().id;
-   
+  constructor(private service: DataService, private route: ActivatedRoute, private storage: StorageService) {
+
+    this.countryId = this.storage.getCountry().id;
+
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       console.log(params.keys.length);
-      this.countryId = params.keys.length? params.get('id'):this.countryId ;
-      this.countryId = params.keys.length? params.get('id'):this.countryId ;
-      let categoryParam = params.get('category');  
-      this.category  = categoryParam? categoryParam:"general";
+      this.countryId = params.keys.length ? params.get('id') : this.countryId;
+      this.countryId = params.keys.length ? params.get('id') : this.countryId;
+      this.category = "general";
       console.log(this.countryId);
       console.log(this.category);
-      this.service.getSource(this.countryId,this.category).subscribe(res=>{
+
+      this.service.getSource(this.category, this.countryId)
+      .subscribe(res => {
         console.log(res.json());
+        let source =  res.json().sources[0];
+        this.getGeneralNews(source.id);
       })
     });
-    
-    this.getGeneralNews();
     this.getSportsNews();
     this.getBussinesNews();
 
@@ -49,8 +50,8 @@ export class NewsContentComponent implements OnInit {
   selectedArticle(data) {
     this.selectedNews = data.newValue;
   }
-  getGeneralNews(): void {
-    this.service.getAll("abc-news-au", "top").subscribe(res => {
+  getGeneralNews(sourceId): void {
+    this.service.getAll(sourceId, "top").subscribe(res => {
       let results = res.json().articles;
       this.genralNews = results;
       this.selectedNews = results[0];

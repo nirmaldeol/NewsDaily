@@ -19,7 +19,9 @@ export class SubPagesComponent implements OnInit {
   category;
   news;
   selectedNews;
-  title;
+  title; 
+
+
   constructor(private service: DataService, private route: ActivatedRoute, private storage: StorageService) {
     this.countryId = this.storage.getCountry().id;
     this.countryName =  this.storage.getCountry().name;
@@ -27,7 +29,6 @@ export class SubPagesComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      console.log(params.keys.length);
       this.countryId = params.keys.length ? params.get('id') : this.countryId;
       this.countryId = params.keys.length ? params.get('id') : this.countryId;
       this.category = params.get('category');
@@ -43,7 +44,6 @@ export class SubPagesComponent implements OnInit {
             this.service.getSource(this.category).subscribe(response => {
               this.title = this.category+' '+'World';
               let firstSource = response.json().sources[0];
-              console.log(firstSource);
               this.getNews(firstSource);
             })
           }
@@ -60,6 +60,7 @@ export class SubPagesComponent implements OnInit {
       .subscribe(res => {
         this.news = res.json().articles;
         this.selectedNews = this.news[0];
+        console.log(this.selectedNews)
       })
 
   }

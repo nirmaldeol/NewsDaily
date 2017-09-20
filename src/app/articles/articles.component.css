@@ -2,3 +2,9 @@
      color: #065bb0;
      text-decoration: underline;
 }
+
+.media{
+    margin: 34px 0 ;
+    padding: 7px 0;
+    border-bottom: 1px solid lightgray;
+}

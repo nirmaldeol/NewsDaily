@@ -11,6 +11,7 @@ export class NavbarComponent implements OnInit {
 
   countryName:string;
   countryId:string;
+  date;
    constructor(private http:Http , private storage:StorageService) {
     
     let name = this.storage.getCountry().name;
@@ -18,13 +19,14 @@ export class NavbarComponent implements OnInit {
 
     this.countryName = name?  name:"Australia";
     this.countryId = id?  id:"au";
+    this.date =  new Date();
     
      }
      
    allCountries = [
      {id:"au",name:"Australia"}, 
      {id:"in",name:"India"}, 
-     {id:"uk",name:"UK"}, 
+     {id:"gb",name:"UK"}, 
      {id:"us",name:"USA"}  
     ];
 
@@ -35,11 +37,7 @@ export class NavbarComponent implements OnInit {
     }
   
   ngOnInit() {
-  // console.log(this.allCountries)
-  //   this.http.get('https://newsapi.org/v1/sources?country=in').subscribe(res=>{
-  //     console.log(res.json());
-  //   })
-    
+
   }
 
 }

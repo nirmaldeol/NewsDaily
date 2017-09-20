@@ -1,14 +1,13 @@
-news-navbar{
-    padding-top: 20px;
-    padding-bottom: 20px;
-  }
 
   .container{
     font-family: 'Open Sans', sans-serif;
   }
 
-  .business-heading{
-    margin-top: 5px;
-  }
 
-  
+ .first-detail{
+  height: 67vh;
+ }
+
+ .detail-news {
+  height : 100vh;
+ }

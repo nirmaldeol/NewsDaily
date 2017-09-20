@@ -8,3 +8,8 @@
     font-family: 'Fredericka the Great', cursive;
     font-size:70px;
 }
+
+.top-bar{
+ border-bottom: 1px solid lightgray;
+ text-align: center;
+}

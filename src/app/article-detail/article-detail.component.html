@@ -5,7 +5,9 @@
      <div class="caption ">
        <h3 >{{selectedArticle.title}}</h3>
        <h5 >{{selectedArticle.author}}</h5>
-       <p> {{selectedArticle.description}}</p>
+       <time>{{selectedArticle.publishedAt | date}}</time>
+       <p class="description"> {{selectedArticle.description}}</p>
+       
        <p><a [href]="selectedArticle.url" class="btn btn-primary" role="button">Read Full Article</a></p>
      </div>
    </div>

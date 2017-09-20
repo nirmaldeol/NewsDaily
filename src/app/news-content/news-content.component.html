@@ -1,25 +1,34 @@
 <div class="panel panel-default">
   <div class="panel-body">
-    <div class="container news-content">
+    <div class="news-content">
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-md-4">
           <h2>Top Stories</h2>
-         <news-articles [articles] = "genralNews" (selected)="selectedArticle($event)"></news-articles>
+          <news-articles [articles]="genralNews" (selected)="selectedArticle($event)"></news-articles>
         </div>
-        <div class="col-md-4" *ngIf="bussinesNews">
-          <h2>Details</h2>
-          <article-detail [selectedArticle] = "selectedNews"></article-detail>
-          <h2 class="business-heading"> Business World</h2>
-          <pic-news [allNews] = "bussinesNews"></pic-news>
-          </div>
+        <div class="col-md-4 detail-news" *ngIf="bussinesNews">
+          
+            <div class="first-detail ">
+              <h2>Details</h2>
+              <article-detail [selectedArticle]="selectedNews"></article-detail>
+            </div>
+
+            <div class="second-detail">
+              <h2 > Business World</h2>
+              <pic-news [allNews]="bussinesNews"></pic-news>
+            </div>
+
+        </div>
         <div class="col-md-4" *ngIf="sportsNews">
           <h2>Sports News</h2>
-          <pic-news [allNews] = "sportsNews"></pic-news>
+          <pic-news [allNews]="sportsNews"></pic-news>
         </div>
-      </div>   <!-- ----row end----- -->
+      </div>
+      <!-- ----row end----- -->
       <hr>
-    </div> <!-- /container --> 
+    </div>
+    <!-- /container -->
   </div>
   <div class="panel-footer">
     <footer>

@@ -1,3 +1,7 @@
+<div class="top-bar"> 
+
+  <time>{{date | date:'medium'}}</time>
+</div>
 <div class="site-top">
     <h1 class="site-title">News Daily</h1>
 </div>
@@ -13,7 +17,7 @@
       </div>
       <div id="navbar" class="navbar-collapse collapse">
     <ul class="nav navbar-nav">
-      <li><a   [routerLink]= "['', countryId, 'genral']" class="glyphicon glyphicon-home"></a></li>
+      <li><a   [routerLink]= "['', countryId]" class="glyphicon glyphicon-home"></a></li>
         <li><a [routerLink]= "['', countryId ,'business']">Business <span class="sr-only">(current)</span></a></li>
         <li><a [routerLink]= "['', countryId ,'sport']">Sports</a></li>
         <li><a [routerLink]= "['', countryId ,'technology']">Technology</a></li>
@@ -21,8 +25,8 @@
         <li><a [routerLink]= "['', countryId ,'gaming']">Gaming</a></li> 
         <li><a [routerLink]= "['', countryId ,'music']">Music</a></li> 
         <li><a [routerLink]= "['', countryId ,'politics']">Politics</a></li>
-        <li><a [routerLink]= "['', countryId ,'science']">Science</a></li>
-        <li><a [routerLink]= "['', countryId ,'sports']">Sports</a></li>
+        <li><a [routerLink]= "['', countryId ,'science-and-nature']">Science</a></li>
+        <li><a [routerLink]= "['', countryId ,'sport']">Sports</a></li>
     </ul>
   <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
