@@ -43,3 +43,4 @@ yarn-error.log
 Thumbs.db
 # Environment file containing API key
 /src/environment/environment.ts
+/src/environment/environment.prod.ts
