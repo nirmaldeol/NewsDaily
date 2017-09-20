@@ -13,3 +13,7 @@
  border-bottom: 1px solid lightgray;
  text-align: center;
 }
+
+.navbar-right{
+    margin-right:0;
+}

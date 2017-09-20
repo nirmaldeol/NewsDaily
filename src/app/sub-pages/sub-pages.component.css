@@ -2,3 +2,21 @@
     font-size: 20px;
     font-weight: bold;
 }
+
+.footer-logo{
+    width: 30px;
+    margin-left:10px;
+    background-color: teal;
+    display: inline-block;
+}
+.link{
+    text-align:right;
+    display: inline; 
+}
+
+.base-footer{
+    margin:0;
+    padding:0;
+    display: inline;
+    line-height: 15px;
+}
