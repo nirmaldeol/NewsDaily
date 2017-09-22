@@ -1,9 +1,15 @@
 
 
  .first-detail{
-  height: 68vh;
+     position: absolute;
+     
+ }
+ .second-detail{
+     position: absolute;
+     top: 65vh;
  }
 
  .detail-news {
+     position: relative;
   height : 100vh;
  }

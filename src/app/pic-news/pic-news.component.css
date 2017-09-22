@@ -6,8 +6,10 @@
 }
 .post-content a h3{
     color: white;   
+    background: rgb(0,0,0);
+    background: rgba(0, 0, 0, 0.5);
     font-size:1.2em;
-    font-family: 'Open Sans', sans-serif;
+
 }
 .post-content h3:hover{
     text-decoration: underline;  
