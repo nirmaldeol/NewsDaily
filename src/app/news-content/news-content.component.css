@@ -1,15 +1,21 @@
 
-
- .first-detail{
-     position: absolute;
-     
- }
- .second-detail{
-     position: absolute;
-     top: 65vh;
+ .detail-sports-row{
+  border-bottom: 1px solid lightgray;
+  height: 620px;
  }
 
- .detail-news {
-     position: relative;
-  height : 100vh;
+ .row .business-row h2 {
+     margin-left: 20px;
  }
+
+ .panel {
+    border-left:none;  
+    border-right:none;
+  }
+/* overrides height of detail class on small devices */
+ @media (max-width: 768px) { 
+   
+    .detail-sports-row{
+        height: auto;
+       }
+  }

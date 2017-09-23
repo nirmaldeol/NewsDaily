@@ -7,22 +7,28 @@
           <h2>Top Stories</h2>
           <news-articles [articles]="genralNews" (selected)="selectedArticle($event)"></news-articles>
         </div>
-        <div class="col-md-4 detail-news" *ngIf="bussinesNews">
-          
-            <div class="first-detail ">
+        <div class="col-md-8 detail-news" *ngIf="selectedNews">
+          <div class="row detail-sports-row">
+            <div class="col-md-6 ">
               <h2>Details</h2>
               <article-detail [selectedArticle]="selectedNews"></article-detail>
             </div>
-
-            <div class="second-detail">
-              <h2 > Business World</h2>
-              <pic-news  [allNews]="bussinesNews"></pic-news>
+            <div class="col-md-6">
+              <h2>Sports News</h2>
+              <pic-news [allNews]="sportsNews"></pic-news>
             </div>
+          </div>
+          <div class="row business-row" *ngIf="bussinesNews">
+            <h2> Business World</h2>
+            <div class="col-md-6">
+              <pic-news [allNews]="bussinesNews"></pic-news>
+            </div>
+            <div class="col-md-6">
 
-        </div>
-        <div class="col-md-4" *ngIf="sportsNews">
-          <h2>Sports News</h2>
-          <pic-news [allNews]="sportsNews"></pic-news>
+              <pic-news [allNews]="moreBussinesNews"></pic-news>
+            </div>
+          </div>
+
         </div>
       </div>
       <!-- ----row end----- -->
@@ -31,8 +37,8 @@
     <!-- /container -->
   </div>
   <div class="panel-footer">
-    <footer>
-      <p>&copy; 2016 Company, Inc.</p>
+    <footer class="link pull-right"> 
+       <a href="https://newsapi.org" class="newsapi-link ">Powered By News API<img class="footer-logo"  src="../../assets/newsapi-logo.png" alt="News API"></a>
     </footer>
   </div>
 </div>

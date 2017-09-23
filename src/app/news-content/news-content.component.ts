@@ -11,13 +11,15 @@ import 'rxjs/add/operator/take';
 })
 export class NewsContentComponent implements OnInit {
 
+  moreBussinesNews: any;
 
-  genralNews;
-  sportsNews;
-  bussinesNews;
-  selectedNews;
-  countryId;
-  category;
+
+    genralNews: any;
+    sportsNews: any;
+  bussinesNews: any;
+  selectedNews: any;
+     countryId: any;
+      category: any;
 
   constructor(private service: DataService, private route: ActivatedRoute, private storage: StorageService) {
 
@@ -53,7 +55,7 @@ export class NewsContentComponent implements OnInit {
   getGeneralNews(sourceId): void {
     this.service.getAll(sourceId, "top").subscribe(res => {
       let results = res.json().articles;
-      this.genralNews = results;
+      this.genralNews = results.slice(0,9);
       this.selectedNews = results[0];
     });
   }
@@ -62,7 +64,7 @@ export class NewsContentComponent implements OnInit {
     this.service.getAll("fox-sports", "top")
       .subscribe(res => {
         let allSports = res.json().articles;
-        this.sportsNews = allSports.slice(0, 5);
+        this.sportsNews = allSports.slice(0, 3);
         console.log(this.sportsNews);
       })
   }
@@ -71,7 +73,8 @@ export class NewsContentComponent implements OnInit {
     this.service.getAll("the-wall-street-journal", "top")
       .subscribe(res => {
         let allBusiness = res.json().articles;
-        this.bussinesNews = allBusiness.slice(0, 2);
+        this.bussinesNews = allBusiness.slice(0, 3);
+        this.moreBussinesNews = allBusiness.slice(3, 6);
         console.log(this.sportsNews);
       })
 

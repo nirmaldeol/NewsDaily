@@ -17,8 +17,12 @@
 
 .thumbnail{
     position:relative;
+    border:none;
+    margin-bottom: 0.2em;
 }
 
-.thumbnail {
-    margin-bottom: 1.6em;
+.thumbnail img{
+   height: 171px;
+   width:100%;
 }
+

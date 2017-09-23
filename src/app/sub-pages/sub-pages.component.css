@@ -20,3 +20,8 @@
     display: inline;
     line-height: 15px;
 }
+
+.panel {
+    border-left:none;  
+    border-right:none;
+  }
