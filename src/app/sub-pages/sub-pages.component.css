@@ -14,11 +14,8 @@
     display: inline; 
 }
 
-.base-footer{
-    margin:0;
-    padding:0;
-    display: inline;
-    line-height: 15px;
+.panel-footer p {
+    display:inline;
 }
 
 .panel {

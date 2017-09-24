@@ -1,9 +1,15 @@
 
  .detail-sports-row{
-  border-bottom: 1px solid lightgray;
+  border-bottom: 3px solid black;
   height: 620px;
  }
 
+ .busines-news{
+     height: 172px;
+ }
+.sports-news{
+ height: 172px;
+}
  .row .business-row h2 {
      margin-left: 20px;
  }
@@ -12,10 +18,27 @@
     border-left:none;  
     border-right:none;
   }
+
+
+  .footer-logo{
+    width: 30px;
+    margin-left:10px;
+    background-color: teal;
+    display: inline-block;
+}
+.link{
+    text-align:right;
+    display: inline; 
+}
+
+.panel-footer p{
+ display: inline;
+}
+
 /* overrides height of detail class on small devices */
- @media (max-width: 768px) { 
-   
-    .detail-sports-row{
-        height: auto;
-       }
-  }
+@media (max-width: 768px) { 
+  
+   .detail-sports-row{
+       height: auto;
+      }
+ }
