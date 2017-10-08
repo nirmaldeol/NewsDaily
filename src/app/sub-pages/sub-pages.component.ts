@@ -20,6 +20,7 @@ export class SubPagesComponent implements OnInit {
   news;
   selectedNews;
   title; 
+ 
 
 
   constructor(private service: DataService, private route: ActivatedRoute, private storage: StorageService) {
@@ -29,20 +30,26 @@ export class SubPagesComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      this.countryId = params.keys.length ? params.get('id') : this.countryId;
-      this.countryId = params.keys.length ? params.get('id') : this.countryId;
-      this.category = params.get('category');
-      this.title = this.category+' '+this.countryName;
-      this.service.getSource(this.category, this.countryId)
+
+        var sourceObj =  {'language':'en','category':'','country':''};
+        sourceObj.category = params.get('category');
+        sourceObj.country  = params.keys.length ? params.get('id') : this.countryId;
+
+      this.title = sourceObj.category+' '+ this.countryName;
+      this.service.getSource(sourceObj)
         .map(res => {
           return res.json().sources[0];
         })
         .subscribe(source => {
           if (source) {
+            console.log(source);
             this.getNews(source);
           } else {
-            this.service.getSource(this.category).subscribe(response => {
-              this.title = this.category+' '+'World';
+            sourceObj.country = '';
+            this.service.getSource(sourceObj).subscribe(response => {
+            console.log(response);
+            
+              this.title = sourceObj.category+' '+'World';
               let firstSource = response.json().sources[0];
               this.getNews(firstSource);
             })
@@ -56,9 +63,10 @@ export class SubPagesComponent implements OnInit {
   };
 
   getNews(source): void {
-    this.service.getAll(source.id, "top")
+    var filter = {'source':source.id, 'sortBy':'top'};
+    this.service.getArticles(filter)
       .subscribe(res => {
-        this.news = res.json().articles;
+        this.news = res.articles;
         this.selectedNews = this.news[0];
         console.log(this.selectedNews)
       })

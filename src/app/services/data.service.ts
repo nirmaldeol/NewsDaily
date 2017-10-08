@@ -5,29 +5,30 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class DataService {
 
+  private readonly newsEndpoint = 'https://newsapi.org/v1/';
   constructor(private _http: Http) {
   }
 
 
-  getAll(source, sort) {
-    let params = new URLSearchParams();
-    params.set("source", source);
-    params.set("sortBy", sort);
-    let requestOptions = new RequestOptions();
-    requestOptions.params = params;
-
-    return this._http.get("https://newsapi.org/v1/articles", requestOptions);
+  getArticles(filter) {
+    var queryPrams = this.createQueryString(filter);
+    return this._http.get(this.newsEndpoint +'articles'+'?'+ queryPrams)
+                    .map(res => res.json());
   }
-  getSource(category, country?){
-    let params = new URLSearchParams();
-    params.set("language", 'en');
-    params.set("country", country);
-    params.set("category", category);
-    
-    let requestOptions = new RequestOptions();
-    requestOptions.params = params;
-    
-    return this._http.get('https://newsapi.org/v1/sources', requestOptions);
+
+  getSource(filter){
+    var queryPrams = this.createQueryString(filter);
+    return this._http.get(this.newsEndpoint+'sources'+'?'+queryPrams );
+  }
+
+  createQueryString(obj:any){
+    var parts=[];
+    for(var prop in obj){
+      var value = obj[prop];
+      if(value !=null && value != undefined )
+      parts.push( encodeURIComponent(prop)+'='+ encodeURIComponent(value));
+    }
+    return parts.join('&');
   }
 
 }

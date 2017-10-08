@@ -2,7 +2,8 @@ import { StorageService } from './../services/storage.service';
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import 'rxjs/add/operator/take';
+import 'rxjs/add/observable/forkJoin';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'news-content',
@@ -19,7 +20,9 @@ export class NewsContentComponent implements OnInit {
   bussinesNews: any;
   selectedNews: any;
      countryId: any;
-      category: any;
+      articleFilter:any = {'source':'', 'sortBy':''};
+      
+
 
   constructor(private service: DataService, private route: ActivatedRoute, private storage: StorageService) {
 
@@ -29,22 +32,23 @@ export class NewsContentComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      console.log(params.keys.length);
-      this.countryId = params.keys.length ? params.get('id') : this.countryId;
-      this.countryId = params.keys.length ? params.get('id') : this.countryId;
-      this.category = "general";
-      console.log(this.countryId);
-      console.log(this.category);
+         var sourceObj = {
+          'language':'en',
+          'country':this.countryId,
+        'category':'general'
+        };
 
-      this.service.getSource(this.category, this.countryId)
+       if(params.has('id')){
+        sourceObj.country = params.get('id');
+       }
+      this.service.getSource(sourceObj)
       .subscribe(res => {
         console.log(res.json());
         let source =  res.json().sources[0];
         this.getGeneralNews(source.id);
       })
     });
-    this.getSportsNews();
-    this.getBussinesNews();
+   this.getSportsAndBussinessNews();
 
 
   }
@@ -53,31 +57,39 @@ export class NewsContentComponent implements OnInit {
     this.selectedNews = data.newValue;
   }
   getGeneralNews(sourceId): void {
-    this.service.getAll(sourceId, "top").subscribe(res => {
-      let results = res.json().articles;
+    var filter =  this.articleFilter;
+    filter.source = sourceId;
+    filter.sortBy = 'top';
+
+    this.service.getArticles(filter).subscribe(res => {
+      let results = res.articles;
       this.genralNews = results.slice(0,9);
       this.selectedNews = results[0];
     });
   }
 
-  getSportsNews(): void {
-    this.service.getAll("fox-sports", "top")
-      .subscribe(res => {
-        let allSports = res.json().articles;
-        this.sportsNews = allSports.slice(0, 3);
-        console.log(this.sportsNews);
-      })
-  }
+  getSportsAndBussinessNews(){
+    var sportsFilter = this.articleFilter;
+    sportsFilter.source = 'fox-sports';
+    sportsFilter.sortBy = 'top';
+    var BussinessFilter = this.articleFilter;
+    BussinessFilter.source = 'the-wall-street-journal';
+    BussinessFilter.sortBy = 'top';
+    
+    Observable.forkJoin(
+      this.service.getArticles(sportsFilter),
+      this.service.getArticles(BussinessFilter)      
+    ).subscribe(data =>{
+      let allSports = data[0].articles;
+      console.log(data[0].articles);
+      let allBusiness = data[1].articles;
+      this.sportsNews = allSports.slice(0, 3);
+      this.bussinesNews = allBusiness.slice(0, 3);
+      this.moreBussinesNews = allBusiness.slice(3, 6);
+    })
 
-  getBussinesNews(): void {
-    this.service.getAll("the-wall-street-journal", "top")
-      .subscribe(res => {
-        let allBusiness = res.json().articles;
-        this.bussinesNews = allBusiness.slice(0, 3);
-        this.moreBussinesNews = allBusiness.slice(3, 6);
-        console.log(this.sportsNews);
-      })
 
+    
   }
 
 }
