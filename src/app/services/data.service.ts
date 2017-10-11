@@ -18,7 +18,8 @@ export class DataService {
 
   getSource(filter){
     var queryPrams = this.createQueryString(filter);
-    return this._http.get(this.newsEndpoint+'sources'+'?'+queryPrams );
+    return this._http.get(this.newsEndpoint+'sources'+'?'+queryPrams)
+                    .map(res=>res.json());
   }
 
   createQueryString(obj:any){

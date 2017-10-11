@@ -1,9 +1,11 @@
+import { SourceQuery } from './../Model/SourceQuery';
 import { StorageService } from './../services/storage.service';
 import { DataService } from './../services/data.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import 'rxjs/add/observable/forkJoin';
 import { Observable } from 'rxjs/Observable';
+import { ArticleQuery } from '../Model/ArticleQuery';
 
 @Component({
   selector: 'news-content',
@@ -15,13 +17,13 @@ export class NewsContentComponent implements OnInit {
   moreBussinesNews: any;
 
 
-    genralNews: any;
-    sportsNews: any;
+  genralNews: any;
+  sportsNews: any;
   bussinesNews: any;
   selectedNews: any;
-     countryId: any;
-      articleFilter:any = {'source':'', 'sortBy':''};
-      
+  countryId: any;
+
+
 
 
   constructor(private service: DataService, private route: ActivatedRoute, private storage: StorageService) {
@@ -32,23 +34,19 @@ export class NewsContentComponent implements OnInit {
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-         var sourceObj = {
-          'language':'en',
-          'country':this.countryId,
-        'category':'general'
-        };
+      var sourceObj = new SourceQuery(this.countryId);
 
-       if(params.has('id')){
+      if (params.has('id')) {
         sourceObj.country = params.get('id');
-       }
+      }
+      console.log(sourceObj)
       this.service.getSource(sourceObj)
-      .subscribe(res => {
-        console.log(res.json());
-        let source =  res.json().sources[0];
-        this.getGeneralNews(source.id);
-      })
+        .subscribe(res => {
+          let source = res.sources[0];
+          this.getGeneralNews(source.id);
+        })
     });
-   this.getSportsAndBussinessNews();
+    this.getSportsAndBussinessNews();
 
 
   }
@@ -57,31 +55,24 @@ export class NewsContentComponent implements OnInit {
     this.selectedNews = data.newValue;
   }
   getGeneralNews(sourceId): void {
-    var filter =  this.articleFilter;
-    filter.source = sourceId;
-    filter.sortBy = 'top';
+    var query = new ArticleQuery(sourceId);
 
-    this.service.getArticles(filter).subscribe(res => {
+    this.service.getArticles(query).subscribe(res => {
       let results = res.articles;
-      this.genralNews = results.slice(0,9);
+      this.genralNews = results.slice(0, 9);
       this.selectedNews = results[0];
     });
   }
 
-  getSportsAndBussinessNews(){
-    var sportsFilter = this.articleFilter;
-    sportsFilter.source = 'fox-sports';
-    sportsFilter.sortBy = 'top';
-    var BussinessFilter = this.articleFilter;
-    BussinessFilter.source = 'the-wall-street-journal';
-    BussinessFilter.sortBy = 'top';
-    
+  getSportsAndBussinessNews() {
+    var sportsQuery = new ArticleQuery('fox-sports')
+    var bussinesQuery = new ArticleQuery('the-wall-street-journal');
+
     Observable.forkJoin(
-      this.service.getArticles(sportsFilter),
-      this.service.getArticles(BussinessFilter)      
-    ).subscribe(data =>{
+      this.service.getArticles(sportsQuery),
+      this.service.getArticles(bussinesQuery)
+    ).subscribe(data => {
       let allSports = data[0].articles;
-      console.log(data[0].articles);
       let allBusiness = data[1].articles;
       this.sportsNews = allSports.slice(0, 3);
       this.bussinesNews = allBusiness.slice(0, 3);
@@ -89,7 +80,7 @@ export class NewsContentComponent implements OnInit {
     })
 
 
-    
+
   }
 
 }

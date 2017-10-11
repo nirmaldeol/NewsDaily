@@ -2,6 +2,10 @@
   <div class="panel-heading">
     <h3 class="panel-title text-center">{{title | uppercase}} </h3>
   </div>
+  <div *ngIf="sourceError" class="alert alert-info" >
+    <strong>Info!</strong> {{sourceError}}
+    <span class="glyphicon glyphicon-remove pull-right" (click)="closeError()"></span>
+  </div>
   <div class="panel-body">
     <div class=" news-content">
       <!-- Example row of columns -->
