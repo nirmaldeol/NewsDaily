@@ -1,4 +1,7 @@
-<div class="panel panel-default">
+<div *ngIf="loading" class=" spinner text-center">
+  <spinner [visible]="loading" ></spinner>
+</div>
+<div *ngIf="!loading" class="panel panel-default">
   <div class="panel-body">
     <div class="news-content">
       <!-- Example row of columns -->

@@ -35,10 +35,14 @@
  display: inline;
 }
 
+.spinner{
+    margin-top:20%;;
+}
 /* overrides height of detail class on small devices */
 @media (max-width: 768px) { 
   
    .detail-sports-row{
        height: auto;
       }
+
  }

@@ -1,3 +1,4 @@
+import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { StorageService } from './services/storage.service';
 import { RequestOptionsService } from './services/request-options.service';
 import { DataService } from './services/data.service';
@@ -17,6 +18,7 @@ import { SubPagesComponent } from './sub-pages/sub-pages.component';
 
 
 
+
 @NgModule({
   declarations: [
   AppComponent,
@@ -26,6 +28,7 @@ import { SubPagesComponent } from './sub-pages/sub-pages.component';
   ArticleDetailComponent,
   PicNewsComponent,
   SubPagesComponent,
+  SpinnerComponent,
 
 
 

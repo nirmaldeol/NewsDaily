@@ -42,3 +42,5 @@ yarn-error.log
 .DS_Store
 Thumbs.db
 # Environment file containing API key
+/environments/environment.prod.ts
+/environments/environment.ts

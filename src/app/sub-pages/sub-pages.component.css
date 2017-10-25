@@ -17,7 +17,9 @@
 .panel-footer p {
     display:inline;
 }
-
+.spinner{
+    margin-top: 20%;
+}
 .panel {
     border-left:none;  
     border-right:none;

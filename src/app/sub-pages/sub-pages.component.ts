@@ -16,7 +16,7 @@ import 'rxjs/add/operator/switchMap';
 })
 export class SubPagesComponent implements OnInit {
   sourceError: any;
-
+  pageLoading:boolean=true;
   countryId;
   countryName;
   news;
@@ -32,12 +32,14 @@ export class SubPagesComponent implements OnInit {
  
 
   constructor(private service: DataService, private route: ActivatedRoute, private storage: StorageService) {
+    
     this.countryId = this.storage.getCountry().id;
     this.countryName = this.storage.getCountry().name;
   }
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
+      this.pageLoading = true;
        var sourceObj =  new SourceQuery(this.countryId);
       sourceObj.category = params.get('category');
       sourceObj.country = params.keys.length ? params.get('id') : this.countryId;
@@ -77,6 +79,7 @@ export class SubPagesComponent implements OnInit {
       .subscribe(res => {
         this.news = res.articles;
         this.selectedNews = this.news[0];
+        this.pageLoading = false;
       })
 
   }

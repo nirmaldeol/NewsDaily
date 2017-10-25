@@ -13,6 +13,7 @@ import { ArticleQuery } from '../Model/ArticleQuery';
   styleUrls: ['./news-content.component.css']
 })
 export class NewsContentComponent implements OnInit {
+  loading: boolean =true;
 
   moreBussinesNews: any;
 
@@ -61,12 +62,13 @@ export class NewsContentComponent implements OnInit {
       let results = res.articles;
       this.genralNews = results.slice(0, 9);
       this.selectedNews = results[0];
+      this.loading =false;
     });
   }
 
   getSportsAndBussinessNews() {
     var sportsQuery = new ArticleQuery('fox-sports')
-    var bussinesQuery = new ArticleQuery('the-wall-street-journal');
+    var bussinesQuery = new ArticleQuery('business-insider-uk');
 
     Observable.forkJoin(
       this.service.getArticles(sportsQuery),

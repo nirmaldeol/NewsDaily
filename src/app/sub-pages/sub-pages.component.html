@@ -1,4 +1,7 @@
-<div class="panel panel-default"  >
+<div *ngIf="pageLoading" class=" spinner text-center">
+  <spinner [visible]="pageLoading" ></spinner>
+</div>
+<div *ngIf="!pageLoading" class="panel panel-default"  >
   <div class="panel-heading">
     <h3 class="panel-title text-center">{{title | uppercase}} </h3>
   </div>
