@@ -1,4 +1,12 @@
 # NewsDaily
+This project is Consuming open  News API to provide headlines from different countries.
+To develop one like this just make  pull request and add environment folder and add two environment files as
+`environment.prod.ts` and `environment.ts` with this config
+
+`export const environment = {`  
+ ` production: false or true acording to file name,`  
+ ` apiKey:'your-news-api-key'`  
+`};`
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
 
